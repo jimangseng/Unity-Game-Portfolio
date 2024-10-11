@@ -14,6 +14,13 @@ public class CannonProjectile : ProjectileBase
         public Force vertical;
         public Force gravity;
 
+        public Trace()
+        {
+            horizontal = new Force(0.0f, Vector3.zero, Vector3.zero);
+            vertical = new Force(0.0f, Vector3.zero, Vector3.zero);
+            gravity = new Force(0.0f, Vector3.zero, Vector3.zero);
+        }
+
         public Vector3 currentPosition
         {
             get { return gravity.currentPosition + horizontal.currentPosition + vertical.currentPosition; }
@@ -27,15 +34,6 @@ public class CannonProjectile : ProjectileBase
         public Vector3 initVelocity
         {
             get; private set;
-        }
-
-        // TODO:
-        public Trace()
-        {
-            time = 0.0f;
-            horizontal = new Force(0.0f, Vector3.zero, Vector3.zero);
-            vertical = new Force(0.0f, Vector3.zero, Vector3.zero);
-            gravity = new Force(0.0f, Vector3.zero, Vector3.zero);
         }
 
         public void UpdateTime(float _time)
@@ -80,10 +78,7 @@ public class CannonProjectile : ProjectileBase
             {
                 get { return initialVelocity; }
             }
-
         }
-
-
     }
 
     public Weapon weapon;
@@ -93,27 +88,27 @@ public class CannonProjectile : ProjectileBase
 
     float elapsedTime;
 
-    public CannonProjectile()
+    public CannonProjectile ()
     {
-        trace = new Trace(); // 동작하는지 확인 - 동작한다 241010
-    }
-
-    protected override void Start()
-    {
-        base.Start();
+        trace = new Trace();
 
         elapsedTime = 0.0f;
 
 
-        float tSpeed = 10.0f;
+        float tSpeed = 10.0f; // todo: 정확한 예측 지점에 착지하도록
         float tAcc = -10.0f;
 
         trace.horizontal.initialVelocity = forceDirection * tSpeed;
 
         trace.vertical.acceleration = tAcc;
-        trace.vertical.initialVelocity = Vector3.up * tSpeed ;
+        trace.vertical.initialVelocity = Vector3.up * tSpeed;
 
         trace.gravity.acceleration = tAcc;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
     }
 
     void Update()

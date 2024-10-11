@@ -12,17 +12,17 @@ public class ProjectileBase : MonoBehaviour
 
     public Vector3 forceDirection;
 
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
         explosion = transform.GetChild(0).GetChild(1).gameObject.GetComponent<ParticleSystem>();
-
     }
 
     // when projectile collides with some object
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.layer != LayerMask.NameToLayer("Obstacle"))
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Obstacle"))
         {
             // deactive collded object
             collision.gameObject.SetActive(false);
@@ -32,7 +32,7 @@ public class ProjectileBase : MonoBehaviour
 
         // clear missile particle system
         transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Clear(false);
-        
+
         // stop smoke particle system
         ParticleSystem smoke = transform.GetChild(0).GetChild(0).gameObject.GetComponent<ParticleSystem>();
         smoke.Stop();
@@ -50,7 +50,6 @@ public class ProjectileBase : MonoBehaviour
         // instantiate projectile and set active
         projInstance = Instantiate(projObject, _from, Quaternion.Euler(projObject.transform.forward));
         projInstance.SetActive(true);
-
 
         // deactive explosion particle system
         projInstance.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);

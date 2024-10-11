@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class BasicProjectile : ProjectileBase
 {
-
+ 
     protected override void Start()
     {
         base.Start();
@@ -19,5 +19,4 @@ public class BasicProjectile : ProjectileBase
 
         projInstance.GetComponent<Rigidbody>().AddForce(forceDirection * 12.0f, ForceMode.Impulse);
     }
-
 }

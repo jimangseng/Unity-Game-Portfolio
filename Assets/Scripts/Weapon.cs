@@ -18,50 +18,39 @@ public class Weapon : MonoBehaviour
     // 궤적 관련
     const int lineSegments = 10;
 
-    public GameObject targetCursor;
-
     public LineRenderer lineRenderer;
 
-    // ???
+    // ??? 캐스팅에 대하여..
     public BasicProjectile basic;
     public CannonProjectile cannon;
     //public ProjectileBase basic;
     //public ProjectileBase cannon;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        lineRenderer.positionCount = lineSegments;
-    }
-
     public void PreviewCannonballTrace()
     {
+        lineRenderer.positionCount = lineSegments;
         lineRenderer.enabled = true;
 
         Vector3[] tPositions = new Vector3[lineSegments];
-        
+
         for (int i = 0; i < lineSegments; i++)
         {
-            tPositions[i] = cannon.trace.currentPosition;
+            tPositions[i] = cannon.trace.currentPosition; // todo: 미리보기 표출되도록
         }
 
         lineRenderer.SetPositions(tPositions);
     }
 
-    public void Fire(AttackMode _attackMode)
+    public void Fire(AttackMode _attackMode, Vector3 _from, Vector3 _to)
     {
-        Vector3 tFireFrom = gameObject.transform.position;
-        tFireFrom.y += 1.5f;
-
-        Vector3 tFIreTo = targetCursor.transform.position;
 
         if(_attackMode == AttackMode.Basic)
         {
-            basic.Fire(tFireFrom, tFIreTo);
+            basic.Fire(_from, _to);
         }
         else if(_attackMode == AttackMode.Cannon)
         {
-            cannon.Fire(tFireFrom, tFIreTo);
+            cannon.Fire(_from, _to);
         }
     }
 }

@@ -40,13 +40,21 @@ public class CharacterController : MonoBehaviour
 
     Weapon weapon;
 
+    public CharacterController()
+    {
+        
+    }
+
     // Start is called before the first frame update
+    void Init()
+    {
+        
+    }
+
     void Start()
     {
         anim = player.GetComponent<Animator>();
-
         weapon = player.GetComponent<Weapon>();
-
     }
 
     // Update is called once per frame
@@ -189,7 +197,12 @@ public class CharacterController : MonoBehaviour
 
     void Fire()
     {
-       player.GetComponent<Weapon>().Fire(attackMode);
+        Vector3 tFrom = player.transform.position;
+        tFrom.y += 1.5f;
+
+        Vector3 tTo = targetCursor.transform.position;
+        
+        player.GetComponent<Weapon>().Fire(attackMode, tFrom, tTo);
     }
 
 
