@@ -176,7 +176,7 @@ public class CharacterController : MonoBehaviour
         if (attackMode == AttackMode.Cannon)
         {
             // 미리보기
-             weapon.PreviewCannonballTrace();
+             weapon.PreviewCannonballTrace(firePosition, targetPosition);
 
             if (Input.GetKey("q"))
             {

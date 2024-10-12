@@ -8,33 +8,54 @@ public class CannonProjectile : ProjectileBase
 {
     public class Trace
     {
+        static Vector3 velocity = Vector3.zero;
+
+
         static float time;
 
         public Force horizontal;
         public Force vertical;
         public Force gravity;
 
+        Vector3 forceDirection;
+
+        public Vector3 Velocity
+        {
+            get { return horizontal.InstVelocity + vertical.InstVelocity + gravity.InstVelocity; }
+            set { }
+        }
+
+        public Vector3 Position
+        {
+            get { return horizontal.CurrentPosition + vertical.CurrentPosition + gravity.CurrentPosition; }
+            set { }
+        }
+
+
+        public Trace(Vector3 _from, Vector3 _to) : this()
+        {
+
+            forceDirection = Vector3.Normalize(_to - _from);
+
+            horizontal.InstVelocity = forceDirection * 10.0f;
+
+            vertical.Acceleration = -10.0f;
+            vertical.InitVelocity = Vector3.up * 10.0f;
+
+            gravity.Acceleration = -10.0f;
+        }
+
         public Trace()
         {
-            horizontal = new Force(0.0f, Vector3.zero, Vector3.zero);
-            vertical = new Force(0.0f, Vector3.zero, Vector3.zero);
-            gravity = new Force(0.0f, Vector3.zero, Vector3.zero);
+            horizontal = new Force();
+            vertical = new Force();
+            gravity = new Force();
+
+            forceDirection = Vector3.zero;
         }
 
-        public Vector3 currentPosition
-        {
-            get { return gravity.currentPosition + horizontal.currentPosition + vertical.currentPosition; }
-        }
 
-        public Vector3 instVelocity
-        {
-            get { return gravity.instVelocity + horizontal.instVelocity + vertical.instVelocity; }
-        }
 
-        public Vector3 initVelocity
-        {
-            get; private set;
-        }
 
         public void UpdateTime(float _time)
         {
@@ -44,39 +65,32 @@ public class CannonProjectile : ProjectileBase
 
         public class Force
         {
-            public float acceleration;
-            public Vector3 initialVelocity;
-            public Vector3 initialPosition;
-
-            public Force(float _acceleration, Vector3 _initialVelocity, Vector3 _initialPosition)
+            public float Acceleration
             {
-                acceleration = _acceleration;
-                initialVelocity = _initialVelocity;
-                initialPosition = _initialPosition;
-                time = 0.0f;
+                get;
+                set;
+            }
+            public Vector3 InitPosition
+            {
+                get;
+                set;
+            }
+            public Vector3 InitVelocity
+            {
+                get;
+                set;
             }
 
-            public Force(float _acceleration, Vector3 _initialVelocity, Vector3 _initialPosition, float _time) : this(_acceleration, _initialVelocity, _initialPosition)
+            public Vector3 InstVelocity
             {
-                acceleration = _acceleration;
-                initialVelocity = _initialVelocity;
-                initialPosition = _initialPosition;
-                time = _time;
+                get { return InitVelocity + new Vector3(0.0f, Acceleration * time, 0.0f); }
+                set { }
             }
 
-            public Vector3 currentPosition
+            public Vector3 CurrentPosition
             {
-                get { return initialPosition + initialVelocity * time + new Vector3(0.0f, (0.5f) * acceleration * time * time, 0.0f); }
-            }
-
-            public Vector3 instVelocity
-            {
-                get{ return initialVelocity + new Vector3(0.0f, acceleration * time, 0.0f); }
-            }
-
-            public Vector3 initVelocity
-            {
-                get { return initialVelocity; }
+                get { return InitPosition + (InitVelocity * time) + (0.5f * time * time * Vector3.up * Acceleration); }
+                set { }
             }
         }
     }
@@ -88,34 +102,18 @@ public class CannonProjectile : ProjectileBase
 
     float elapsedTime;
 
-    public CannonProjectile ()
-    {
-        trace = new Trace();
-
-        elapsedTime = 0.0f;
-
-
-        float tSpeed = 10.0f; // todo: 정확한 예측 지점에 착지하도록
-        float tAcc = -10.0f;
-
-        trace.horizontal.initialVelocity = forceDirection * tSpeed;
-
-        trace.vertical.acceleration = tAcc;
-        trace.vertical.initialVelocity = Vector3.up * tSpeed;
-
-        trace.gravity.acceleration = tAcc;
-    }
-
     protected override void Start()
     {
         base.Start();
+
+        trace = new Trace();
     }
 
     void Update()
     {
         trace.UpdateTime(elapsedTime);
 
-        GetComponent<Rigidbody>().velocity = trace.instVelocity;
+        GetComponent<Rigidbody>().velocity = velocity;
         elapsedTime = elapsedTime + Time.deltaTime;
     }
 
@@ -123,6 +121,8 @@ public class CannonProjectile : ProjectileBase
     {
         base.Fire(_from, _to);
 
+        trace = new Trace(_from, _to);
+        velocity = trace.Velocity;
     }
 }
 
