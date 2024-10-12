@@ -8,41 +8,22 @@ public class CannonProjectile : ProjectileBase
 {
     public class Trace
     {
-        static Vector3 velocity = Vector3.zero;
+        public static float Time { get; set; }
 
-
-        static float time;
-
-        public Force horizontal;
-        public Force vertical;
-        public Force gravity;
+        Force horizontal;
+        Force vertical;
+        Force gravity;
 
         Vector3 forceDirection;
 
-        public Vector3 Velocity
-        {
-            get { return horizontal.InstVelocity + vertical.InstVelocity + gravity.InstVelocity; }
-            set { }
-        }
-
         public Vector3 Position
         {
-            get { return horizontal.CurrentPosition + vertical.CurrentPosition + gravity.CurrentPosition; }
-            set { }
+            get { return horizontal.currentPosition + vertical.currentPosition + gravity.currentPosition; }
         }
 
-
-        public Trace(Vector3 _from, Vector3 _to) : this()
+        public Vector3 Velocity
         {
-
-            forceDirection = Vector3.Normalize(_to - _from);
-
-            horizontal.InstVelocity = forceDirection * 10.0f;
-
-            vertical.Acceleration = -10.0f;
-            vertical.InitVelocity = Vector3.up * 10.0f;
-
-            gravity.Acceleration = -10.0f;
+            get { return horizontal.instantVelocity + vertical.instantVelocity + gravity.instantVelocity; }
         }
 
         public Trace()
@@ -54,53 +35,44 @@ public class CannonProjectile : ProjectileBase
             forceDirection = Vector3.zero;
         }
 
-
-
-
-        public void UpdateTime(float _time)
+        public Trace(Vector3 _from, Vector3 _to) : this()
         {
-            time = _time;
+            float tMagnitude = 10.0f;
+
+            forceDirection = Vector3.Normalize(_to - _from);
+
+            horizontal.initialVelocity = forceDirection * tMagnitude;
+
+            vertical.acceleration = -9.8f;
+            vertical.initialVelocity = Vector3.up * tMagnitude;
+
+            gravity.acceleration = -9.8f;
         }
 
-
-        public class Force
+        public void update()
         {
-            public float Acceleration
-            {
-                get;
-                set;
-            }
-            public Vector3 InitPosition
-            {
-                get;
-                set;
-            }
-            public Vector3 InitVelocity
-            {
-                get;
-                set;
-            }
+            horizontal.instantVelocity = (horizontal.acceleration * Vector3.up) * Time + horizontal.initialVelocity;
+            horizontal.currentPosition = (0.5f) * (horizontal.acceleration * Vector3.up) * Time * Time + horizontal.instantVelocity * Time + horizontal.initialPosition;
 
-            public Vector3 InstVelocity
-            {
-                get { return InitVelocity + new Vector3(0.0f, Acceleration * time, 0.0f); }
-                set { }
-            }
+            vertical.instantVelocity = (vertical.acceleration * Vector3.up) * Time + vertical.initialVelocity;
+            vertical.currentPosition = (0.5f) * (vertical.acceleration * Vector3.up) * Time * Time + vertical.instantVelocity * Time + vertical.initialPosition;
 
-            public Vector3 CurrentPosition
-            {
-                get { return InitPosition + (InitVelocity * time) + (0.5f * time * time * Vector3.up * Acceleration); }
-                set { }
-            }
+            gravity.instantVelocity = (gravity.acceleration * Vector3.up) * Time + gravity.initialVelocity;
+            gravity.currentPosition = (0.5f) * (gravity.acceleration * Vector3.up) * Time * Time + gravity.instantVelocity * Time + gravity.initialPosition;
+
         }
     }
 
-    public Weapon weapon;
-    Vector3 velocity;
+    public class Force
+    {
+        public float acceleration;
+        public Vector3 initialVelocity;
+        public Vector3 initialPosition;
+        public Vector3 instantVelocity;
+        public Vector3 currentPosition;
+    }
 
     public Trace trace;
-
-    float elapsedTime;
 
     protected override void Start()
     {
@@ -109,20 +81,11 @@ public class CannonProjectile : ProjectileBase
         trace = new Trace();
     }
 
-    void Update()
+    private void Update()
     {
-        trace.UpdateTime(elapsedTime);
-
-        GetComponent<Rigidbody>().velocity = velocity;
-        elapsedTime = elapsedTime + Time.deltaTime;
+        Trace.Time += Time.deltaTime;
+        trace.update(); 
     }
 
-    public override void Fire(Vector3 _from, Vector3 _to)
-    {
-        base.Fire(_from, _to);
-
-        trace = new Trace(_from, _to);
-        velocity = trace.Velocity;
-    }
 }
 

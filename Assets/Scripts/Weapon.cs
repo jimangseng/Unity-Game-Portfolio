@@ -21,11 +21,8 @@ public class Weapon : MonoBehaviour
 
     public LineRenderer lineRenderer;
 
-    // ??? 캐스팅에 대하여..
     public BasicProjectile basic;
     public CannonProjectile cannon;
-    //public ProjectileBase basic;
-    //public ProjectileBase cannon;
 
     public void PreviewCannonballTrace(Vector3 _from, Vector3 _to)
     {
