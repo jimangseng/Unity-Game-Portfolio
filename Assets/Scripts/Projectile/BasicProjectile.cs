@@ -7,15 +7,9 @@ using UnityEngine.EventSystems;
 
 public class BasicProjectile : ProjectileBase
 {
- 
-    protected override void Start()
+    public override void fire(Vector3 _from, Vector3 _to)
     {
-        base.Start();
-    }
-
-    public override void Fire(Vector3 _from, Vector3 _to)
-    {
-        base.Fire(_from, _to);
+        base.fire(_from, _to);
 
         projInstance.GetComponent<Rigidbody>().AddForce(forceDirection * 12.0f, ForceMode.Impulse);
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
@@ -10,13 +11,17 @@ public class ProjectileBase : MonoBehaviour
     public GameObject projObject;
     public GameObject projInstance;
 
-    public Vector3 forceDirection;
+    public Weapon weapon;
 
+    protected Vector3 forceDirection;
+
+    protected Rigidbody rb;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         explosion = transform.GetChild(0).GetChild(1).gameObject.GetComponent<ParticleSystem>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // when projectile collides with some object
@@ -42,9 +47,8 @@ public class ProjectileBase : MonoBehaviour
         explosion.Play();
     }
 
-    public virtual void Fire(Vector3 _from, Vector3 _to)
+    public virtual void fire(Vector3 _from, Vector3 _to)
     {
-        // calculate force direction
         forceDirection = Vector3.Normalize(_to - _from);
 
         // instantiate projectile and set active
@@ -53,6 +57,7 @@ public class ProjectileBase : MonoBehaviour
 
         // deactive explosion particle system
         projInstance.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+
     }
 
 }

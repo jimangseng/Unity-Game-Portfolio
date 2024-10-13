@@ -38,23 +38,11 @@ public class CharacterController : MonoBehaviour
     Status prevMode = Status.Stopped;
     AttackMode attackMode = AttackMode.Basic;
 
-    Weapon weapon;
-
-    public CharacterController()
-    {
-        
-    }
-
-    // Start is called before the first frame update
-    void Init()
-    {
-        
-    }
+    public Weapon weapon;
 
     void Start()
     {
         anim = player.GetComponent<Animator>();
-        weapon = player.GetComponent<Weapon>();
     }
 
     // Update is called once per frame
@@ -176,7 +164,7 @@ public class CharacterController : MonoBehaviour
         if (attackMode == AttackMode.Cannon)
         {
             // 미리보기
-             weapon.PreviewCannonballTrace(firePosition, targetPosition);
+             //weapon.previewTrace(firePosition, targetPosition);
 
             if (Input.GetKey("q"))
             {
@@ -201,8 +189,8 @@ public class CharacterController : MonoBehaviour
         tFrom.y += 1.5f;
 
         Vector3 tTo = targetCursor.transform.position;
-        
-        player.GetComponent<Weapon>().Fire(attackMode, tFrom, tTo);
+
+        weapon.fire(attackMode, tFrom, tTo);
     }
 
 

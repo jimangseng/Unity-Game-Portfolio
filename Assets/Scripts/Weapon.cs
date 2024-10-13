@@ -5,10 +5,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
-using static Weapon;
 
-public class Weapon : MonoBehaviour
+public class Weapon: MonoBehaviour
 {
     public enum AttackMode
     {
@@ -16,42 +14,59 @@ public class Weapon : MonoBehaviour
         Cannon
     }
 
-    // 궤적 관련
-    const int lineSegments = 10;
-
-    public LineRenderer lineRenderer;
-
     public BasicProjectile basic;
     public CannonProjectile cannon;
 
-    public void PreviewCannonballTrace(Vector3 _from, Vector3 _to)
+    // 궤적 관련
+    public Trace trace;
+    const int lineSegments = 10;
+    public LineRenderer lineRenderer;
+
+    Vector3 from;
+    Vector3 to;
+
+    private void Start()
+    {
+        trace = new Trace();
+        trace.time = 0.0f;
+    }
+
+    private void Update()
+    {
+        trace.time += Time.deltaTime;
+    }
+
+    public void previewTrace(Vector3 _from, Vector3 _to)
     {
         lineRenderer.positionCount = lineSegments;
         lineRenderer.enabled = true;
 
         Vector3[] tPositions = new Vector3[lineSegments];
 
-        cannon.trace = new CannonProjectile.Trace(_from, _to);
+        //trace = new Trace(_from, _to);
+        //trace.update(_from, _to);
 
         for (int i = 0; i < lineSegments; i++)
         {
-            tPositions[i] = cannon.trace.Position; // todo: 미리보기 표출되도록
+            //tPositions[i] = cannon.trace.Position; // todo: 미리보기 표출되도록
         }
 
         lineRenderer.SetPositions(tPositions);
     }
 
-    public void Fire(AttackMode _attackMode, Vector3 _from, Vector3 _to)
+    public void fire(AttackMode _attackMode, Vector3 _from, Vector3 _to)
     {
+        from = _from;
+        to = _to;
 
-        if(_attackMode == AttackMode.Basic)
+        if (_attackMode == AttackMode.Basic)
         {
-            basic.Fire(_from, _to);
+            basic.fire(_from, _to);
         }
-        else if(_attackMode == AttackMode.Cannon)
+        else if (_attackMode == AttackMode.Cannon)
         {
-            cannon.trace = new CannonProjectile.Trace(_from, _to);
-            cannon.Fire(_from, _to);
+            cannon.fire(_from, _to);
         }
     }
+
 }
