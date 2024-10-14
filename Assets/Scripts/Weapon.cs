@@ -15,8 +15,10 @@ public class Weapon: MonoBehaviour
     }
 
     // 투사체 관련
-    public GameObject obj;
-    public Projectile projectile;
+    public GameObject basicObj;
+    public GameObject cannonObj;
+    public BasicProjectile basicProjectile;
+    public CannonProjectile cannonProjectile;
 
     // 궤적 관련
     const int lineSegments = 2;
@@ -24,7 +26,9 @@ public class Weapon: MonoBehaviour
 
     private void Start()
     {
-        projectile.projInstance = Instantiate(obj);
+        // TODO: 시간
+        basicProjectile.projInstance = Instantiate(basicObj);
+        cannonProjectile.projInstance = Instantiate(cannonObj);
     }
 
     // 궤적 미리보기
@@ -48,13 +52,12 @@ public class Weapon: MonoBehaviour
     {
         if (_attackMode == AttackMode.Basic)
         {
-            projectile.fire(_from, _to);
-            //UnityEngine.Debug.Log("기본무기 발사");
+            basicProjectile.fire(_from, _to);
         }
 
         else if (_attackMode == AttackMode.Cannon)
         {
-            UnityEngine.Debug.Log("대포 발사");
+            cannonProjectile.fire(_from, _to);
         }
     }
 

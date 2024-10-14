@@ -208,8 +208,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b73b24c2ff4595409b981c1fb7c5aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obj: {fileID: 426927218}
-  projectile: {fileID: 426927226}
+  basicObj: {fileID: 426927218}
+  cannonObj: {fileID: 1089041247}
+  basicProjectile: {fileID: 426927226}
+  cannonProjectile: {fileID: 1089041259}
   lineRenderer: {fileID: 1526988569}
 --- !u!114 &289470474
 MonoBehaviour:
@@ -474,6 +476,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2003009380340648631}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1089041259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5347635223712100429, guid: 829bad171b6c8104b93ce1d8dec901ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2003009380340648631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089041247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b96c29557e5aa448790a363fb86007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1154498096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1492,6 +1506,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2051710600}
     m_Modifications:
+    - target: {fileID: 5347635223712100429, guid: 829bad171b6c8104b93ce1d8dec901ac,
+        type: 3}
+      propertyPath: projObject
+      value: 
+      objectReference: {fileID: 1089041247}
     - target: {fileID: 6118894152621464781, guid: 829bad171b6c8104b93ce1d8dec901ac,
         type: 3}
       propertyPath: m_Name
