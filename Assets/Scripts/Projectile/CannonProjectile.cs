@@ -4,19 +4,60 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 
-public class CannonProjectile : ProjectileBase
+public class CannonProjectile : Projectile
 {
+    //// ëŒ€í¬ì•Œì´ ê·¸ë¦¬ëŠ” ê¶¤ì 
+    //public Trace trace;
 
-    private void Update()
-    {
-        rb.velocity = weapon.GetComponent<Weapon>().trace.Velocity;
-        // ¹ß»çÇÒ ¶§ »Ó¸¸ÀÌ ¾Æ´Ï¶ó, ¸Å ÇÁ·¹ÀÓ velocity¸¦ °»½ÅÇØÁà¾ß ÇÏ´Âµ¥
-    }
+    //// Projectileì„ ì‚¬ìš©í•˜ê³  ìˆëŠ” Weapon ê°ì²´
+    //public Weapon weapon;
 
-    public override void fire(Vector3 _from, Vector3 _to)
-    {
-        base.fire(_from, _to);
-    }
+    //// Particle ê´€ë ¨
+    //ParticleSystem explosion;
+
+
+    //protected virtual void Start()
+    //{
+    //    explosion = transform.GetChild(0).GetChild(1).gameObject.GetComponent<ParticleSystem>();
+
+    //    // trace ì´ˆê¸°í™”
+    //    trace = new Trace();
+    //}
+
+
+    //private void Update()
+    //{
+    //    trace.update();
+    //    // ì´ë¡œì¨ traceëŠ” ë§¤ í”„ë ˆì„ ìµœì‹ í™”ëœë‹¤
+
+    //    //inst.GetComponent<Rigidbody>().velocity = trace.Velocity;
+    //    // ë§¤ í”„ë ˆì„ velocityë¥¼ ê°±ì‹ 
+    //}
+
+
+    //// ì¶©ëŒ ì‹œ
+    //void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.layer != LayerMask.NameToLayer("Obstacle"))
+    //    {
+    //        // ì¶©ëŒí•œ ë¬¼ì²´ deactivate
+    //        collision.gameObject.SetActive(false);
+    //    }
+    //    // prevent object from colliding(?)
+    //    GetComponent<BoxCollider>().enabled = false;
+
+    //    // clear missile particle system
+    //    transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Clear(false);
+
+    //    // stop smoke particle system
+    //    ParticleSystem smoke = transform.GetChild(0).GetChild(0).gameObject.GetComponent<ParticleSystem>();
+    //    smoke.Stop();
+
+    //    // play explosion particle system
+    //    transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+    //    explosion.Play();
+    //}
+
 
 
 }

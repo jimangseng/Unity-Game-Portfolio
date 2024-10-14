@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 물리량의 묶음
 public class Force
 {
     public float acceleration;

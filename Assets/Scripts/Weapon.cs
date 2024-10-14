@@ -15,28 +15,12 @@ public class Weapon: MonoBehaviour
     }
 
     // 투사체 관련
-    public BasicProjectile basic;
-    public CannonProjectile cannon;
+    public GameObject obj;
+    public Projectile projectile;
 
     // 궤적 관련
-    public Trace trace;
-    const int lineSegments = 10;
+    const int lineSegments = 2;
     public LineRenderer lineRenderer;
-    Vector3 from;
-    Vector3 to;
-
-    private void Start()
-    {
-        trace = new Trace();
-        trace.time = 0.0f;
-    }
-
-    private void Update()
-    {
-        trace.time += Time.deltaTime;
-        trace.update(from, to);
-        // 이로써 trace는 매 프레임 최신화된다.
-    }
 
     // 궤적 미리보기
     public void previewTrace(Vector3 _from, Vector3 _to)
@@ -46,31 +30,26 @@ public class Weapon: MonoBehaviour
 
         Vector3[] tPositions = new Vector3[lineSegments];
 
-        //trace = new Trace(_from, _to);
-        //trace.update(_from, _to);
-
         for (int i = 0; i < lineSegments; i++)
         {
-            tPositions[i] = trace.Position; // todo: 미리보기 표출되도록
+            //tPositions[i] = cannon.trace.Position; // todo: 미리보기 표출되도록
         }
 
         lineRenderer.SetPositions(tPositions);
     }
 
-    // 발사 시 호출
+    // 발사 시 호출. 왜? 발사의 방향을 알려야하니까.
     public void fire(AttackMode _attackMode, Vector3 _from, Vector3 _to)
     {
-        // 멤버 초기화
-        from = _from;
-        to = _to;
-
         if (_attackMode == AttackMode.Basic)
         {
-            basic.fire(_from, _to);
+            projectile.fire(_from, _to);
+            //UnityEngine.Debug.Log("기본무기 발사");
         }
+
         else if (_attackMode == AttackMode.Cannon)
         {
-            cannon.fire(_from, _to);
+            UnityEngine.Debug.Log("대포 발사");
         }
     }
 

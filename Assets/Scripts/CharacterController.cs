@@ -43,6 +43,7 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
         anim = player.GetComponent<Animator>();
+        weapon = GetComponent<Weapon>();
     }
 
     // Update is called once per frame

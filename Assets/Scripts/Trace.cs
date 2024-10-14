@@ -1,16 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using static Weapon;
 
 public class Trace
 {
+    // 시간
     public float time;
 
+    // 궤적의 시작점과 끝점
+    Vector3 from;
+    Vector3 to;
+
+    // 궤적을 이루는 각각의 힘
     Force horizontal;
     Force vertical;
     Force gravity;
 
+    // 현재 위치, 순간 속도
     public Vector3 Position;
     public Vector3 Velocity;
 
@@ -26,7 +34,7 @@ public class Trace
     public Trace(Vector3 _from, Vector3 _to): this()
     {
         Vector3 tDirection = Vector3.Normalize(_to - _from);
-        float tMagnitude = 1.0f;
+        float tMagnitude = 10.0f;
 
         horizontal.initialVelocity = tDirection * tMagnitude;
 
@@ -36,11 +44,12 @@ public class Trace
         gravity.acceleration = -9.8f;
     }
 
-    public void update(Vector3 _from, Vector3 _to)
+    public void update()
     {
+        time += Time.deltaTime;
 
-        Vector3 tDirection = Vector3.Normalize(_to - _from);
-        float tMagnitude = 3.0f;
+        Vector3 tDirection = Vector3.Normalize(to - from);
+        float tMagnitude = 10.0f;
 
         horizontal.initialVelocity = tDirection * tMagnitude;
         horizontal.instantVelocity = (horizontal.acceleration * Vector3.right) * time + horizontal.initialVelocity;
@@ -58,6 +67,9 @@ public class Trace
 
         Position = horizontal.currentPosition + vertical.currentPosition + gravity.currentPosition;
         Velocity = horizontal.instantVelocity + vertical.instantVelocity + gravity.instantVelocity;
+
+        //Position = horizontal.currentPosition;
+        //Velocity = horizontal.instantVelocity;
 
     }
 }
