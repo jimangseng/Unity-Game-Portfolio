@@ -14,6 +14,7 @@ public class Weapon: MonoBehaviour
         Cannon
     }
 
+    // 투사체 관련
     public BasicProjectile basic;
     public CannonProjectile cannon;
 
@@ -21,7 +22,6 @@ public class Weapon: MonoBehaviour
     public Trace trace;
     const int lineSegments = 10;
     public LineRenderer lineRenderer;
-
     Vector3 from;
     Vector3 to;
 
@@ -34,8 +34,11 @@ public class Weapon: MonoBehaviour
     private void Update()
     {
         trace.time += Time.deltaTime;
+        trace.update(from, to);
+        // 이로써 trace는 매 프레임 최신화된다.
     }
 
+    // 궤적 미리보기
     public void previewTrace(Vector3 _from, Vector3 _to)
     {
         lineRenderer.positionCount = lineSegments;
@@ -54,8 +57,10 @@ public class Weapon: MonoBehaviour
         lineRenderer.SetPositions(tPositions);
     }
 
+    // 발사 시 호출
     public void fire(AttackMode _attackMode, Vector3 _from, Vector3 _to)
     {
+        // 멤버 초기화
         from = _from;
         to = _to;
 

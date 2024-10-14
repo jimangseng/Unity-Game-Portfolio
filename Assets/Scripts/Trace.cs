@@ -38,7 +38,6 @@ public class Trace
 
     public void update(Vector3 _from, Vector3 _to)
     {
-        time = 0.0f;
 
         Vector3 tDirection = Vector3.Normalize(_to - _from);
         float tMagnitude = 3.0f;
