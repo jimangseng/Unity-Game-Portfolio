@@ -14,11 +14,11 @@ public class Weapon: MonoBehaviour
         Cannon
     }
 
-    // Åõ»çÃ¼ °ü·Ã
+    // íˆ¬ì‚¬ì²´ ê´€ë ¨
     public BasicProjectile basic;
     public CannonProjectile cannon;
 
-    // ±ËÀû °ü·Ã
+    // ê¶¤ì  ê´€ë ¨
     public Trace trace;
     const int lineSegments = 10;
     public LineRenderer lineRenderer;
@@ -35,10 +35,10 @@ public class Weapon: MonoBehaviour
     {
         trace.time += Time.deltaTime;
         trace.update(from, to);
-        // ÀÌ·Î½á trace´Â ¸Å ÇÁ·¹ÀÓ ÃÖ½ÅÈ­µÈ´Ù.
+        // ì´ë¡œì¨ traceëŠ” ë§¤ í”„ë ˆì„ ìµœì‹ í™”ëœë‹¤.
     }
 
-    // ±ËÀû ¹Ì¸®º¸±â
+    // ê¶¤ì  ë¯¸ë¦¬ë³´ê¸°
     public void previewTrace(Vector3 _from, Vector3 _to)
     {
         lineRenderer.positionCount = lineSegments;
@@ -51,16 +51,16 @@ public class Weapon: MonoBehaviour
 
         for (int i = 0; i < lineSegments; i++)
         {
-            //tPositions[i] = cannon.trace.Position; // todo: ¹Ì¸®º¸±â Ç¥ÃâµÇµµ·Ï
+            tPositions[i] = trace.Position; // todo: ë¯¸ë¦¬ë³´ê¸° í‘œì¶œë˜ë„ë¡
         }
 
         lineRenderer.SetPositions(tPositions);
     }
 
-    // ¹ß»ç ½Ã È£Ãâ
+    // ë°œì‚¬ ì‹œ í˜¸ì¶œ
     public void fire(AttackMode _attackMode, Vector3 _from, Vector3 _to)
     {
-        // ¸â¹ö ÃÊ±âÈ­
+        // ë©¤ë²„ ì´ˆê¸°í™”
         from = _from;
         to = _to;
 

@@ -29,11 +29,11 @@ public class CharacterController : MonoBehaviour
     // Components
     Animator anim;
 
-    // Move °ü·Ã
+    // Move ê´€ë ¨
     Vector3 playerDestination = Vector3.zero;
     Vector3 targetDirection = Vector3.zero;
 
-    // Status °ü·Ã
+    // Status ê´€ë ¨
     Status mode = Status.Stopped;
     Status prevMode = Status.Stopped;
     AttackMode attackMode = AttackMode.Basic;
@@ -163,18 +163,18 @@ public class CharacterController : MonoBehaviour
 
         if (attackMode == AttackMode.Cannon)
         {
-            // ¹Ì¸®º¸±â
-             //weapon.previewTrace(firePosition, targetPosition);
+            // ë¯¸ë¦¬ë³´ê¸°
+             weapon.previewTrace(firePosition, targetPosition);
 
             if (Input.GetKey("q"))
             {
-                // ¹ß»ç°¢ »ó½Â
-                Debug.Log("¹ß»ç°¢ »ó½Â");
+                // ë°œì‚¬ê° ìƒìŠ¹
+                Debug.Log("ë°œì‚¬ê° ìƒìŠ¹");
             }
             else if (Input.GetKey("e"))
             {
-                // ¹ß»ç°¢ ÇÏ°­
-                Debug.Log("¹ß»ç°¢ ÇÏ°­");
+                // ë°œì‚¬ê° í•˜ê°•
+                Debug.Log("ë°œì‚¬ê° í•˜ê°•");
             }
 
         }
