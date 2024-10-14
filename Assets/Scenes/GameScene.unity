@@ -208,8 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b73b24c2ff4595409b981c1fb7c5aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicObj: {fileID: 426927218}
-  cannonObj: {fileID: 1089041247}
+  obj: {fileID: 426927218}
   projectile: {fileID: 426927226}
   lineRenderer: {fileID: 1526988569}
 --- !u!114 &289470474
@@ -475,20 +474,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2003009380340648631}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1089041259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089041247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b96c29557e5aa448790a363fb86007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projObject: {fileID: 0}
-  projInstance: {fileID: 0}
 --- !u!1 &1154498096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,15 +1547,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5522611489511583820, guid: 829bad171b6c8104b93ce1d8dec901ac, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6118894152621464781, guid: 829bad171b6c8104b93ce1d8dec901ac,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1089041259}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 829bad171b6c8104b93ce1d8dec901ac, type: 3}
 --- !u!1001 &4204604700844767863
 PrefabInstance:
@@ -1584,11 +1564,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Projectile
-      objectReference: {fileID: 0}
-    - target: {fileID: 6319431645895081046, guid: 4d440999d3528f74591b83d891d5d5c1,
-        type: 3}
-      propertyPath: weapon
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8473409485339171919, guid: 4d440999d3528f74591b83d891d5d5c1,
         type: 3}

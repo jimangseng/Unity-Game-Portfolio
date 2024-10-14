@@ -22,6 +22,11 @@ public class Weapon: MonoBehaviour
     const int lineSegments = 2;
     public LineRenderer lineRenderer;
 
+    private void Start()
+    {
+        projectile.projInstance = Instantiate(obj);
+    }
+
     // 궤적 미리보기
     public void previewTrace(Vector3 _from, Vector3 _to)
     {

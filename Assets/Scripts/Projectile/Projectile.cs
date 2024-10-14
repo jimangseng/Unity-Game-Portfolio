@@ -25,8 +25,6 @@ public class Projectile : MonoBehaviour
 
     protected virtual void Start()
     {
-        projInstance = Instantiate(projObject);
-
         explosion = transform.GetChild(0).GetChild(1).gameObject.GetComponent<ParticleSystem>();
         rb = projInstance.GetComponent<Rigidbody>();
     }
