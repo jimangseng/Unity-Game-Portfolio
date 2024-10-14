@@ -26,10 +26,7 @@ public class Weapon: MonoBehaviour
 
     private void Start()
     {
-        // TODO: 시간
-        // 투사체 인스턴스화
-        //basicProjectile.projInstance = Instantiate(basicObj);
-        //cannonProjectile.projInstance = Instantiate(cannonObj);
+
     }
 
     // 궤적 미리보기

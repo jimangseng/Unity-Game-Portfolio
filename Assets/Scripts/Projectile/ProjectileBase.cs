@@ -33,13 +33,9 @@ public class ProjectileBase : MonoBehaviour
         projInstance = Instantiate(projObject, _from, Quaternion.Euler(projObject.transform.forward));
         projInstance.SetActive(true);
 
-
-
         // 파티클 시스템 종료
         //projInstance.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
         // 임시로 주석처리 - 1014
-
-
 
     }
 }
