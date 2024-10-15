@@ -17,8 +17,8 @@ public class Weapon: MonoBehaviour
     // 투사체 관련
     public GameObject basicObj;
     public GameObject cannonObj;
-    public BasicProjectile basicProjectile;
-    public CannonProjectile cannonProjectile;
+    ProjectileBase basic;
+    ProjectileBase cannon;
 
     // 궤적 관련
     const int lineSegments = 2;
@@ -26,7 +26,13 @@ public class Weapon: MonoBehaviour
 
     private void Start()
     {
+        basic = new BasicProjectile(basicObj);
+        cannon = new CannonProjectile(cannonObj);
+    }
 
+    private void Update()
+    {
+        cannon.update();
     }
 
     // 궤적 미리보기
@@ -45,17 +51,17 @@ public class Weapon: MonoBehaviour
         lineRenderer.SetPositions(tPositions);
     }
 
-    // 발사 시 호출. 왜? 발사의 방향을 알려야하니까.
+
     public void fire(AttackMode _attackMode, Vector3 _from, Vector3 _to)
     {
         if (_attackMode == AttackMode.Basic)
         {
-            basicProjectile.fire(_from, _to);
+            basic.fire(_from, _to);
         }
 
         else if (_attackMode == AttackMode.Cannon)
         {
-            cannonProjectile.fire(_from, _to);
+            cannon.fire(_from, _to);
         }
     }
 

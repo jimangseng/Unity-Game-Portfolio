@@ -210,8 +210,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basicObj: {fileID: 426927218}
   cannonObj: {fileID: 1089041247}
-  basicProjectile: {fileID: 426927226}
-  cannonProjectile: {fileID: 1089041259}
   lineRenderer: {fileID: 1526988569}
 --- !u!114 &289470474
 MonoBehaviour:
@@ -257,18 +255,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4204604700844767863}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &426927226 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6319431645895081046, guid: 4d440999d3528f74591b83d891d5d5c1,
-    type: 3}
-  m_PrefabInstance: {fileID: 4204604700844767863}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426927218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38f5c52d2f8ea3349b9ad4b21600a134, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &671313130 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6353737702128865792, guid: cb52a9cc104924044a071c09413e3311,
@@ -476,18 +462,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2003009380340648631}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1089041259 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5347635223712100429, guid: 829bad171b6c8104b93ce1d8dec901ac,
-    type: 3}
-  m_PrefabInstance: {fileID: 2003009380340648631}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089041247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b96c29557e5aa448790a363fb86007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1154498096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,7 +1540,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5347635223712100429, guid: 829bad171b6c8104b93ce1d8dec901ac, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1634,7 +1609,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6319431645895081046, guid: 4d440999d3528f74591b83d891d5d5c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
